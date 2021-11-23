@@ -1,0 +1,39 @@
+<head th:replace="layout/head :: head">
+  <title id="pageTitle">Add</title>
+</head>
+
+<body >
+<div class="container body__main mh-80">
+      <div th:replace="layout/header :: header">...</div>
+	
+        <div class="container">
+            
+			<div class="row">
+				
+				<div class="col-lg-4 col-sm-12 mx-auto">
+				<h2 class="text-center jumbotron my-3">Rebonjour de te revoir</h2>
+					<img src="/img/nerd.png" class="rounded mx-auto d-block mb-2" style="width:200px; height:auto">
+		            <form method="post" class="" id="form">
+		            	
+		                
+		                <div class="form-group">
+		                    <label for="emailInput" class="" >Email</label>
+		                    <input class="form-control"  id="emailInput" type="text" autofocus/>
+		                </div>
+		
+		                <div class="form-group mt-3">
+		                    <label for="passwordInput" class="" >Password</label>
+		                    <input class="form-control"  id="passwordInput" type="password" />
+		                </div>
+
+		                <input class="btn btn-primary  w-100  my-5" type="submit" value="Valider" />
+		
+		            </form>
+				</div>
+	        </div>
+        </div>
+            
+    <div th:replace="layout/footer :: footer">...</div>
+</div>
+</body>
+</html>
