@@ -10,7 +10,7 @@
             <h2>Ajouter un super nanard</h2>
 
             <form method="post" th:object=${film} th:action="@{/film/ajouter}" >
-            	<div th:if="${#fields.hasErrors('*')}" class="alertalert-danger"><p th:text="#{index.erreurs}">Message d'erreur</p></div>
+            	
                 
                 <div class="form-group">
                     <label for="titreInput" class="offset-1 col-2" >Titre</label>
@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="synopsisInput" class="offset-1 col-2">Synopsis</label>
-                    <input id="synopsisInput" type="text"  th:field="*{synopsis}"/>
+                    <textarea id="synopsisInput" th:field="*{synopsis}"/>
                 </div>
                 <span class="help-block" th:if="${#fields.hasErrors('synopsis')}"><ul><li th:each="erreur: ${#fields.errors('synopsis')}" th:text="${erreur}"></li></ul></span>
 

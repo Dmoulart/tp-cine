@@ -1,42 +1,63 @@
 package fr.eni.tpcine.bo;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
-
+@Entity
 public class Film {
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@NotBlank(message = "Vous devez renseigner un titre à ce flim.")
-	@Length(min=2,max=25, message="Le titre doit comporter entre 2 et 25 caractères.")
+	@Length(min=0,max=250, message="Le titre doit comporter entre 2 et 25 caractères.")
+	@Basic
 	private String titre;
 	
 	@Range(min=1895, max=2022, message="L'année de sortie du flim doit se trouver entre 1895 et 2022")
+	@Basic
 	private int annee;
 	
-	@Length(min=15,max=400, message="Le synopsis doit comporter entre 15 et 400 caractères.")
+	@Length(min=0, max=4000, message="Le synopsis doit comporter entre 15 et 400 caractères.")
+	@Basic
 	private String synopsis;
 	
 	@Range(min=2, max=400, message="La durée du film doit être entre 2 minutes et 400 minutes.")
+	@Basic
 	private float duree;
-	private ArrayList<Personne> listActeurs;
+	
+	@ManyToMany(cascade= {CascadeType.PERSIST})
+	@JoinTable(name="FilmActeurs", joinColumns= {@JoinColumn(name="filmId")}, inverseJoinColumns={@JoinColumn(name="acteurId")})
+	private List<Personne> listActeurs;
 	
 	@NotNull(message="Le film doit avoir un réalisateur")
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Personne realisateur;
 	
 	@NotNull(message="Le film doit avoir un genre")
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Genre genre;
 	
 	public Film() {
 	}
 
-	public Film(int id, String titre, int annee, float duree, ArrayList<Personne> listActeurs, Personne realisateur,
+	public Film(int id, String titre, int annee, float duree, List<Personne> listActeurs, Personne realisateur,
 			Genre genre) {
 		this.setId(id);
 		this.titre = titre;
@@ -47,7 +68,7 @@ public class Film {
 		this.setGenre(genre);
 	}
 	
-	public Film(int id, String titre, int annee, float duree, ArrayList<Personne> listActeurs,
+	public Film(int id, String titre, int annee, float duree, List<Personne> listActeurs,
 			Personne realisateur, Genre genre, String synopsis) {
 		super();
 		this.setId(id);
@@ -60,7 +81,7 @@ public class Film {
 		this.setGenre(genre);
 	}
 
-	public Film(String titre, int annee, float duree, ArrayList<Personne> listActeurs, Personne realisateur,
+	public Film(String titre, int annee, float duree, List<Personne> listActeurs, Personne realisateur,
 			Genre genre) {
 		this.titre = titre;
 		this.annee = annee;
@@ -96,11 +117,11 @@ public class Film {
 		this.duree = duree;
 	}
 
-	public ArrayList<Personne> getListActeurs() {
+	public List<Personne> getListActeurs() {
 		return listActeurs;
 	}
 
-	public void setListActeurs(ArrayList<Personne> listActeurs) {
+	public void setListActeurs(List<Personne> listActeurs) {
 		this.listActeurs = listActeurs;
 	}
 

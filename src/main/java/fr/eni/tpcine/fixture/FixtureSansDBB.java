@@ -53,34 +53,34 @@ public class FixtureSansDBB {
 		);
 	}
 
-	public ArrayList<Film> fixture() {
+	public List<Film> fixture() {
 		
 		ArrayList<Film> listFilms = new ArrayList<Film>();
 		
-		Genre genre = new Genre(1,"horreur");
-		Genre genre1 = new Genre(2,"comédie");
-		Genre genre2 = new Genre(3,"biopic");
-		Genre genre3 = new Genre(4,"aventure");
-		Genre genre4 = new Genre(5,"fantastique");
-		Genre genre5 = new Genre(6,"sf");		
-		Genre genre6 = new Genre(7,"dramatique");
+		Genre genre = new Genre("horreur");
+		Genre genre1 = new Genre("comédie");
+		Genre genre2 = new Genre("biopic");
+		Genre genre3 = new Genre("aventure");
+		Genre genre4 = new Genre("fantastique");
+		Genre genre5 = new Genre("sf");		
+		Genre genre6 = new Genre("dramatique");
 
 
-		Personne acteur = new Personne(1,"Damon","Matt",bio.damon);
-		Personne acteur1 = new Personne(2,"Dicaprio","Leo",bio.dicaprio);
-		Personne acteur2 = new Personne(3,"Garell","Louis",bio.garel);
-		Personne acteur3 = new Personne(4,"Cotillard","Marion",bio.cotillard);
-		Personne acteur4 = new Personne(5,"Eva","Green",bio.green);
-		Personne acteur5 = new Personne(6,"Seydoux","Lea",bio.seydoux);
-		Personne acteur6 = new Personne(7,"Pitt","Brad",bio.pitt);
-		Personne acteur7 = new Personne(8,"Perry","Luc",bio.perry);
+		Personne acteur = new Personne("Damon","Matt",bio.damon);
+		Personne acteur1 = new Personne("Dicaprio","Leo",bio.dicaprio);
+		Personne acteur2 = new Personne("Garell","Louis",bio.garel);
+		Personne acteur3 = new Personne("Cotillard","Marion",bio.cotillard);
+		Personne acteur4 = new Personne("Eva","Green",bio.green);
+		Personne acteur5 = new Personne("Seydoux","Lea",bio.seydoux);
+		Personne acteur6 = new Personne("Pitt","Brad",bio.pitt);
+		Personne acteur7 = new Personne("Perry","Luc",bio.perry);
 
 
-		Personne realistaeur = new Personne(1,"Nolan","Christopher",bio.nolan);
-		Personne realistaeur1 = new Personne(2,"Quentin","Tarantino",bio.tarantino);
-		Personne realistaeur2 = new Personne(3,"Bernardo","Bertolucci",bio.bertolucci);
-		Personne realistaeur3 = new Personne(4,"Gus","Van Sant",bio.vantSant);
-		Personne realistaeur4 = new Personne(5,"Wes","Anderson",bio.anderson);
+		Personne realistaeur = new Personne("Nolan","Christopher",bio.nolan);
+		Personne realistaeur1 = new Personne("Quentin","Tarantino",bio.tarantino);
+		Personne realistaeur2 = new Personne("Bernardo","Bertolucci",bio.bertolucci);
+		Personne realistaeur3 = new Personne("Gus","Van Sant",bio.vantSant);
+		Personne realistaeur4 = new Personne("Wes","Anderson",bio.anderson);
 		
 		//Gerry
 		ArrayList<Personne> listeActeurs = new ArrayList<Personne>();

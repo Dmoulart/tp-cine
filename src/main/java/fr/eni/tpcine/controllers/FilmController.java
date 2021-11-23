@@ -68,9 +68,11 @@ public class FilmController {
 	}
 	
 	@PostMapping("/film/ajouter")
-	public String add(@Valid @ModelAttribute("film") Film film, BindingResult result) {
+	public String add(@Valid @ModelAttribute("film") Film film, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			System.out.println("Errors");
+			model.addAttribute("personnes", this.personneService.findAll());
+			model.addAttribute("genres", this.genreService.findAll());
 			return "pages/add";
 		}
 		this.filmService.create(film);

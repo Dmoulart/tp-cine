@@ -1,36 +1,39 @@
 package fr.eni.tpcine.services;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.eni.tpcine.bo.Film;
 import fr.eni.tpcine.bo.Personne;
-import fr.eni.tpcine.fixture.FixtureSansDBB;
+import fr.eni.tpcine.repository.PersonneRepository;
 
 @Service
-public class PersonneService implements PersonneServiceInterface {
+public class PersonneService implements PersonneServiceInterface{
 	
-	private static List<Personne> personnes;
+	PersonneRepository repository;
 	
-	private FixtureSansDBB generator;
-	
-	public PersonneService(FixtureSansDBB generator) {
-		this.generator = generator;
-		PersonneService.personnes = this.generator.personneFixture();
+	@Autowired
+	public PersonneService(PersonneRepository repository) {
+		this.repository = repository;
 	}
 	
 	@Override
 	public List<Personne> findAll() {
-		return PersonneService.personnes;
+		return this.findAll();
 	}
 
 	@Override
-	public Personne find(int id) {
-		return PersonneService.personnes.stream()
-				  .filter(f-> id  == f.getId())
-				  .findAny()
-				  .orElse(null);	
+	public Optional<Personne> find(Integer id) {
+		return this.find(id);
+	}
+
+	@Override
+	public void create(Personne object) {
+		this.repository.save(object);
+		this.repository.flush();
+		
 	}
 	
 

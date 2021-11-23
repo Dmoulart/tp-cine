@@ -1,10 +1,27 @@
 package fr.eni.tpcine.bo;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.lang.Nullable;
+
+@Entity
 public class Personne {
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@Basic
 	private String nom;
+	@Basic
 	private String prenom;
+	
+	@Basic
+	@Length(min=0,max=15000)
+	@Nullable
 	private String bio;
 	
 	public Personne() {
