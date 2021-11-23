@@ -21,7 +21,7 @@ public class PersonneService implements PersonneServiceInterface{
 	
 	@Override
 	public List<Personne> findAll() {
-		return this.findAll();
+		return repository.findAll();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package fr.eni.tpcine.bo;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,9 @@ public class Personne {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	@Basic
+	@Column(unique=false)//true
 	private String nom;
 	@Basic
 	private String prenom;

@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.lang.Nullable;
 
 @Entity
 public class Film {
@@ -26,7 +27,7 @@ public class Film {
 	private int id;
 	
 	@NotBlank(message = "Vous devez renseigner un titre à ce flim.")
-	@Length(min=0,max=250, message="Le titre doit comporter entre 2 et 25 caractères.")
+	@Length(min=1,max=50, message="Le titre doit comporter entre 1 et 50 caractères.")
 	@Basic
 	private String titre;
 	
@@ -34,15 +35,16 @@ public class Film {
 	@Basic
 	private int annee;
 	
-	@Length(min=0, max=4000, message="Le synopsis doit comporter entre 15 et 400 caractères.")
+	@Length(min=0, max=4000, message="Le synopsis doit comporter entre 0 et 4000 caractères.")
+	@Nullable
 	@Basic
 	private String synopsis;
 	
 	@Range(min=2, max=400, message="La durée du film doit être entre 2 minutes et 400 minutes.")
 	@Basic
-	private float duree;
+	private Integer duree;
 	
-	@ManyToMany(cascade= {CascadeType.PERSIST})
+	@ManyToMany(cascade= {CascadeType.PERSIST,})
 	@JoinTable(name="FilmActeurs", joinColumns= {@JoinColumn(name="filmId")}, inverseJoinColumns={@JoinColumn(name="acteurId")})
 	private List<Personne> listActeurs;
 	
@@ -57,7 +59,7 @@ public class Film {
 	public Film() {
 	}
 
-	public Film(int id, String titre, int annee, float duree, List<Personne> listActeurs, Personne realisateur,
+	public Film(int id, String titre, int annee, Integer duree, List<Personne> listActeurs, Personne realisateur,
 			Genre genre) {
 		this.setId(id);
 		this.titre = titre;
@@ -68,7 +70,7 @@ public class Film {
 		this.setGenre(genre);
 	}
 	
-	public Film(int id, String titre, int annee, float duree, List<Personne> listActeurs,
+	public Film(int id, String titre, int annee, Integer duree, List<Personne> listActeurs,
 			Personne realisateur, Genre genre, String synopsis) {
 		super();
 		this.setId(id);
@@ -81,7 +83,7 @@ public class Film {
 		this.setGenre(genre);
 	}
 
-	public Film(String titre, int annee, float duree, List<Personne> listActeurs, Personne realisateur,
+	public Film(String titre, int annee, Integer duree, List<Personne> listActeurs, Personne realisateur,
 			Genre genre) {
 		this.titre = titre;
 		this.annee = annee;
@@ -109,11 +111,11 @@ public class Film {
 		this.annee = annee;
 	}
 
-	public float getDuree() {
+	public Integer getDuree() {
 		return duree;
 	}
 
-	public void setDuree(float duree) {
+	public void setDuree(Integer duree) {
 		this.duree = duree;
 	}
 

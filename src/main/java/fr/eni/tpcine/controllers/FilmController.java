@@ -43,9 +43,9 @@ public class FilmController {
 		
 		var film = this.filmService.find(id);
 		
-		if(film == null)  return "redirect:/listFilms";
+		if(null == film || film.isEmpty())  return "redirect:/listFilms";
 		
-		model.addAttribute("film", film);
+		model.addAttribute("film", film.get());
 		
 		return "pages/detail";
 	}

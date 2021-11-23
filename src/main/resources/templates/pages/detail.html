@@ -23,7 +23,12 @@
 	  		<p th:text="${film.synopsis}" class="text-capitalize"></p>
 	  		
 	  		<p th:text="${film.duree}"></p>
-	  	
+	  		
+	  		<hr>
+	  		
+	  		<p>Acteurs</p>
+	  		<p th:each="acteur: ${film.listActeurs}" th:text="${acteur.nom}+${acteur.prenom}"></p>
+		  	
 	  	</article>
 	  </div>
 	  
