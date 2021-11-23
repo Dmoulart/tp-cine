@@ -79,7 +79,7 @@ public class FilmController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/listFilms")
+	@GetMapping({"/listFilms", "/"})
 	public String listFilms(Model model) {
 		
 		model.addAttribute("films",filmService.findAll());

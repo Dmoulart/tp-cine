@@ -11,11 +11,11 @@
             
 			<div class="row">
 				
-				<div class="col-6"></div>
+				<div class="col-6" id="aside-poster"></div>
 				
 				<div class="col-6">
 				<h2 class="text-center jumbotron">Ajouter un super nanard</h2>
-		            <form method="post" class="" th:object=${film} th:action="@{/film/ajouter}" >
+		            <form method="post" class="" id="form" th:object=${film} th:action="@{/film/ajouter}" >
 		            	
 		                
 		                <div class="form-group">
@@ -34,13 +34,13 @@
 		
 		                <div class="form-group">
 		                    <label for="synopsisInput" class="">Synopsis</label>
-		                    <textarea class="form-control" id="synopsisInput" placeholder="Il était une fois..." th:field="*{synopsis}"/>
+		                    <textarea class="form-control" id="synopsisInput" placeholder="Il ï¿½tait une fois..." th:field="*{synopsis}" rows="10"/>
 		                </div>
 		                <span class="help-block" th:if="${#fields.hasErrors('synopsis')}"><ul><li th:each="erreur: ${#fields.errors('synopsis')}" th:text="${erreur}"></li></ul></span>
 		
 		
 		                <div class="form-group">
-		                    <label for="dureeInput" class="">Durée</label>
+		                    <label for="dureeInput" class="">Durï¿½e</label>
 		                    <input min="2" max="1000" value="90" class="form-control"  id="dureeInput" type="number"  th:field="*{duree}"/>
 		                </div>
 		                <span class="help-block" th:if="${#fields.hasErrors('duree')}"><ul><li th:each="erreur: ${#fields.errors('duree')}" th:text="${erreur}"></li></ul></span>
@@ -75,5 +75,6 @@
             
     <div th:replace="layout/footer :: footer">...</div>
 </div>
+<script type="module" src="/js/add.js"></script>
 </body>
 </html>

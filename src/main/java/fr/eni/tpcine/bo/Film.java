@@ -35,7 +35,7 @@ public class Film {
 	@Basic
 	private int annee;
 	
-	@Length(min=0, max=4000, message="Le synopsis doit comporter entre 0 et 4000 caractères.")
+	@Length(min=0, max=1000, message="Le synopsis doit comporter entre 0 et 400 caractères.")
 	@Nullable
 	@Basic
 	private String synopsis;
