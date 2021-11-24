@@ -47,7 +47,7 @@
 		
 		                
 		                 <div class="form-group">   
-		                 	<label for="realisateurInput" class="2">Réalisateur</label>
+		                 	<label for="realisateurInput" class="">Réalisateur</label>
 		                    <select class="form-select" th:field="*{realisateur}" required>
 		                        <option th:each="realisateur: ${personnes}" 
 		                        th:value="${realisateur.id}" th:text="${realisateur.nom}"></option>

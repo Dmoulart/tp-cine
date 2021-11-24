@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import fr.eni.tpcine.bo.Avis;
 import fr.eni.tpcine.bo.Film;
+import fr.eni.tpcine.services.AvisServiceInterface;
 import fr.eni.tpcine.services.FilmServiceInterface;
 import fr.eni.tpcine.services.GenreServiceInterface;
 import fr.eni.tpcine.services.PersonneServiceInterface;
@@ -26,6 +30,7 @@ public class FilmController {
 	private FilmServiceInterface filmService;
 	private PersonneServiceInterface personneService;
 	private GenreServiceInterface genreService;
+	private AvisServiceInterface avisService;
 	
 	
 	
@@ -33,10 +38,12 @@ public class FilmController {
 	private void setService(
 			FilmServiceInterface service, 
 			PersonneServiceInterface personneService,
-			GenreServiceInterface genreService) {
+			GenreServiceInterface genreService,
+			AvisServiceInterface avisService) {
 		this.filmService = service;
 		this.personneService = personneService;
 		this.genreService = genreService;
+		this.avisService = avisService;
 	}
 	
 	@GetMapping("/film/{id}")
@@ -46,9 +53,24 @@ public class FilmController {
 		
 		var film = this.filmService.find(id);
 		
-		if(null == film || film.isEmpty())  return "redirect:/listFilms";
+		if(film.isEmpty())  return "redirect:/listFilms";
 		
 		model.addAttribute("film", film.get());
+		
+		if(film.get().getAvis().size() > 0) {
+			var avis = film.get().getAvis().get(0);
+			System.out.println(avis.getComment());
+			System.out.println(avis.getUser().getUsername());
+		}
+		
+		//Franglish is killing me...
+		var userAvis = new Avis();
+		
+		// Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		userAvis.setFilm(film.get());
+		
+		model.addAttribute("newAvis", userAvis);
 		
 		return "pages/detail";
 	}
@@ -79,6 +101,16 @@ public class FilmController {
 			return "pages/add";
 		}
 		this.filmService.create(film);
+		return "redirect:/";
+	}
+	
+	@PostMapping("/avis/ajouter")
+	public String addAvis(@Valid @ModelAttribute("avis") Avis avis, BindingResult result, Model model) {
+		System.out.println(avis);
+		if(result.hasErrors()) {
+			return "pages/add";
+		}
+		this.avisService.create(avis);
 		return "redirect:/";
 	}
 	

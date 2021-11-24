@@ -22,6 +22,7 @@ public class Genre extends AppEntity {
 		this.libelle = libelle;
 	}
 
+
 	public Genre(String libelle) {
 		this.libelle = libelle;
 	}
@@ -34,4 +35,9 @@ public class Genre extends AppEntity {
 		this.libelle = libelle;
 	}
 	
+	@Override
+	public String toString() {
+		return "Genre [libelle=" + libelle + "]";
+	}
+
 }

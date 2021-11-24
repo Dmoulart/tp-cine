@@ -31,6 +31,7 @@ public class AppUser extends AppEntity {
 	@JoinColumn(name = "user_id")
 	private List<Avis> avis;
 	
+
 	public AppUser() {}
 	
 	public AppUser(String username, String password) {
@@ -61,4 +62,10 @@ public class AppUser extends AppEntity {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
+	@Override
+	public String toString() {
+		return "AppUser [username=" + username + ", password=" + password + ", roles=" + roles + ", avis=" + avis + "]";
+	}
+
 }

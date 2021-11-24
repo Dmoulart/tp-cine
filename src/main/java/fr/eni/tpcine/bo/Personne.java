@@ -25,7 +25,8 @@ public class Personne extends AppEntity {
 	@Length(min=0,max=15000)
 	@Nullable
 	private String bio;
-	
+
+
 	public Personne() {
 	}
 
@@ -80,7 +81,8 @@ public class Personne extends AppEntity {
 		this.bio = bio;
 	}
 	
-	
-	
-
+	@Override
+	public String toString() {
+		return "Personne [nom=" + nom + ", prenom=" + prenom + ", bio=" + bio + "]";
+	}
 }

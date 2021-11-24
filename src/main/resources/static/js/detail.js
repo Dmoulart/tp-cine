@@ -13,7 +13,7 @@ function addPoster(poster) {
   const aside = document.getElementById("aside-poster");
   const image = new Image();
   image.src = poster;
-  image.style.width = "25vw";
+  image.style.width = "35vw";
   image.style.height = "auto";
   image.onload = function () {
     aside.appendChild(image);

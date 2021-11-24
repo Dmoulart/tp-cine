@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Avis extends AppEntity {
-	
 	@Basic
 	int note;
 	
@@ -28,7 +27,7 @@ public class Avis extends AppEntity {
 	Film film;
 	
 	public Avis() {}
-	
+
 	public Avis(int note, Date date, String comment) {
 		super();
 		this.note = note;
@@ -60,7 +59,26 @@ public class Avis extends AppEntity {
 		this.comment = comment;
 	}
 
+	public AppUser getUser() {
+		return user;
+	}
 
+	public void setUser(AppUser user) {
+		this.user = user;
+	}
+
+	public Film getFilm() {
+		return film;
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
+	}
 	
-
+	
+	/*@Override
+	public String toString() {
+		return "Avis [note=" + note + ", date=" + date + ", comment=" + comment + ", user=" + user + ", film=" + film
+				+ "]";
+	}*/
 }

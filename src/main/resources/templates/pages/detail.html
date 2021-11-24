@@ -12,7 +12,7 @@
 	  	<aside class="col-sm" id="aside-poster"></aside>
 	  	<article class="col-lg">
 	  	
-	  		<h1 th:text="${film.titre}" id="movie-title" class="text-capitalize"></h1>
+	  		<h1 th:text="${film.titre}" id="movie-title" class="text-capitalize mb-5"></h1>
 	  		
 	  		<p th:text="${film.realisateur.nom}" class="text-capitalize"></p>
 	  		
@@ -26,12 +26,42 @@
 	  		
 	  		<hr>
 	  		
-	  		<p>Acteurs</p>
+	  		<h3 class="my-5">Acteurs</h3>
 	  		<p th:each="acteur: ${film.listActeurs}" th:text="${acteur.nom}+${acteur.prenom}"></p>
+		  		
+		  	<hr class="my-5"/>
+		  	
+		  	<h3 class="my-5">Les avis</h3>
+	  		
+	  		<th:block th:each="avis: ${film.avis}">
+	  		
+	  			<p class="font-weight-bold" style="font-weight:bold; font-variant-caps: small-caps" th:text="${avis.user.username}"> </p>
+	  			<p class="font-italic " style="margin-left:2rem;" th:text="${avis.comment}"> </p>
+
+	  		</th:block>	
+	  		
+	  		<h3 class="mt-5">Laisser un avis </h3>
+	  		
+	  		<form method="post" class="" id="form" th:object=${newAvis} th:action="@{/avis/ajouter}" >
+	  			 <div class="form-group" >
+		              <label for="noteInput" class="">Note</label>
+		              <input class="form-control" id="noteInput" type="number"  th:field="*{note}"/>
+		         </div>
+		         
+		         <div class="form-group" >
+		              <label for="commentInput" class="">Commentaire</label>
+		              <textarea row="20"  placeholder="Ce film de m..."  class="form-control" id="commentInput" th:field="*{comment}"/>
+		         </div>
+		         
+		        <input type="hidden"  th:field="${newAvis.film}" th:value="${film.id}">
+		         
+		         <input class="btn btn-primary  w-100  mt-4" type="submit" value="Commenter" />
+		  	</form> 
 		  	
 	  	</article>
+	  	
 	  </div>
-	  
+		  
 	
       <div th:replace="layout/footer :: footer">...</div>
 </div>

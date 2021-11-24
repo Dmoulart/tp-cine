@@ -59,7 +59,16 @@ public class Film extends AppEntity {
 	@JoinColumn(name = "film_id")
 	private List<Avis> avis;
 	
-	
+
+
+	public List<Avis> getAvis() {
+		return avis;
+	}
+
+	public void setAvis(List<Avis> avis) {
+		this.avis = avis;
+	}
+
 	public Film() {
 		super();
 	}
@@ -158,6 +167,12 @@ public class Film extends AppEntity {
 	
 	
 	
+	@Override
+	public String toString() {
+		return "Film [titre=" + titre + ", annee=" + annee + ", synopsis=" + synopsis + ", duree=" + duree
+				+ ", listActeurs=" + listActeurs + ", realisateur=" + realisateur + ", genre=" + genre + ", avis="
+				+ avis + "]";
+	}
 	
 	
 
