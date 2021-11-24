@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.tpcine.bo.Film;
 import fr.eni.tpcine.services.FilmServiceInterface;
@@ -25,6 +26,8 @@ public class FilmController {
 	private FilmServiceInterface filmService;
 	private PersonneServiceInterface personneService;
 	private GenreServiceInterface genreService;
+	
+	
 	
 	@Autowired
 	private void setService(
@@ -79,7 +82,7 @@ public class FilmController {
 		return "redirect:/";
 	}
 	
-	@GetMapping({"/listFilms", "/"})
+	@GetMapping({"/listFilms", "/","/home"})
 	public String listFilms(Model model) {
 		
 		model.addAttribute("films",filmService.findAll());

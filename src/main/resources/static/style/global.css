@@ -1,12 +1,16 @@
 body {
-  background-color: #212529 !important;
+  background: rgb(16, 17, 19);
+  background: linear-gradient(
+    22deg,
+    rgba(16, 17, 19, 1) 0%,
+    rgba(61, 68, 75, 1) 100%
+  );
   color: white !important;
   animation: fadeIn 0.2;
   overflow-x: hidden;
-  overflow-y: hidden;
+
 }
 .btn {
-
 }
 @keyframes fadeIn {
   0% {

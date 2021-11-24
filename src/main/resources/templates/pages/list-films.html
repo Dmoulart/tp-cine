@@ -7,9 +7,11 @@
       <div th:replace="layout/header :: header">...</div>
       <div class="row">
         
-        <div th:each="film : ${films}" class="card mx-2 my-2" style="width: 18%; background-color: transparent;" >
-          <img class="film-img card-img-top" th:id="${film.titre}">
-          <a th:utext="${film.titre}" class="text-capitalize card-title text-center text-decoration-none" style="" th:href="@{/film/{id}(id=${film.id})}"></a>
+        <div th:each="film : ${films}" class="card mx-2 my-2 " style="width: 18%; background-color: transparent; border:none;" >
+          
+          <a class="text-capitalize card-title text-center text-decoration-none" style="" th:href="@{/film/{id}(id=${film.id})}">
+            <img class="film-img card-img-top shadow" th:id="${film.titre}" style="height:320px;width:210px;">
+          </a>
         </div>
 
      <!--   <div class="col-md-3"><h3>Titre</h3></div>

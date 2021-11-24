@@ -59,7 +59,15 @@
           <li>
             <a href="/login" class="nav-link fs-4 text-white">
               <img src="/img/user.png" style="height: 22px; width: auto" />
-              Mon compte
+              
+             <span sec:authorize="isAuthenticated()"> 
+             	<span sec:authentication="name"> </span>
+             </span>
+             
+             <span sec:authorize="isAnonymous()"> 
+             	Se connecter
+             </span>
+             
             </a>
           </li>
           <li>

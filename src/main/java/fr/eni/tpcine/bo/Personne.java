@@ -19,6 +19,7 @@ public class Personne {
 	@Basic
 	@Column(unique=false)//true
 	private String nom;
+	
 	@Basic
 	private String prenom;
 	
