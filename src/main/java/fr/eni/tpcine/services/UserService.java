@@ -20,33 +20,28 @@ import fr.eni.tpcine.repository.EntityRepository;
 
 @Service
 public class UserService extends EntityService<AppUser> implements UserDetailsService, UserServiceInterface {
-	
-	@Autowired
-    private PasswordEncoder passwordEncoder;
-	
-	public UserService(AppUserRepository repository) {
-		
-		super(repository);
-		System.out.println("user service");
-	}
-	
 
-	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	public UserService(AppUserRepository repository) {
+		super(repository);
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("user details");
 		AppUser user = ((AppUserRepository) this.repository).findByUsername(username);
-		if(user == null){
+		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+				getAuthority(user));
 	}
 
 	private Collection<? extends GrantedAuthority> getAuthority(AppUser user) {
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 		user.getRoles().forEach(role -> {
-			//authorities.add(new SimpleGrantedAuthority(role.getName()));
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
 		});
 		return authorities;
 	}

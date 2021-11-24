@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		var user = new AppUser("bob",encoder.encode("azerty"));
 		
 		userService.create(user);
-		System.out.println("user details service web config");
+
 		return (UserDetailsService) userService;
 	}
 
