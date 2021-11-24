@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -53,6 +54,11 @@ public class Film extends AppEntity {
 	@NotNull(message="Le film doit avoir un genre")
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Genre genre;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "film_id")
+	private List<Avis> avis;
+	
 	
 	public Film() {
 		super();
