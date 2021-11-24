@@ -11,10 +11,8 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
 
 @Entity
-public class Personne {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+public class Personne extends AppEntity {
+	
 	
 	@Basic
 	@Column(unique=false)//true
@@ -81,15 +79,6 @@ public class Personne {
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
 	
 	
 	

@@ -33,8 +33,6 @@ public class PersonneService implements PersonneServiceInterface{
 	public void create(Personne object) {
 		this.repository.save(object);
 		this.repository.flush();
-		
 	}
-	
 
 }

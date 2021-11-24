@@ -22,3 +22,13 @@ VALUES("Le seigneur des anneaux", 2001, 120, "Les orcs, gobelins blabla", 2, 1),
 
 INSERT INTO film_acteurs (film_id,acteur_id)
 VALUES (1,2),(1,3), (2,4), (2,5), (3,3), (3,4), (3,3), (4,1), (4,2), (4,3),(4,4);
+
+INSERT INTO app_user (username, password) VALUES ( 'user1', '$2a$04$Ye7/lJoJin6.m9sOJZ9ujeTgHEVM4VXgI2Ingpsnf9gXyXEXf/IlW');
+INSERT INTO app_user (username, password) VALUES ( 'user2', '$2a$04$StghL1FYVyZLdi8/DIkAF./2rz61uiYPI3.MaAph5hUq03XKeflyW');
+INSERT INTO app_user (username, password) VALUES ( 'user3', '$2a$04$Lk4zqXHrHd82w5/tiMy8ru9RpAXhvFfmHOuqTmFPWQcUhBD8SSJ6W');
+
+INSERT INTO role (id, description, name) VALUES (4, 'Admin role', 'ADMIN');
+INSERT INTO role (id, description, name) VALUES (5, 'User role', 'USER');
+
+INSERT INTO user_roles (user_id, role_id) VALUES (1, 4);
+INSERT INTO user_roles (user_id, role_id) VALUES (2, 5);

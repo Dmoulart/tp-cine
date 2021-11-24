@@ -21,10 +21,8 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.lang.Nullable;
 
 @Entity
-public class Film {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+public class Film extends AppEntity {
+	
 	
 	@NotBlank(message = "Vous devez renseigner un titre à ce flim.")
 	@Length(min=1,max=50, message="Le titre doit comporter entre 1 et 50 caractères.")
@@ -57,11 +55,12 @@ public class Film {
 	private Genre genre;
 	
 	public Film() {
+		super();
 	}
 
 	public Film(int id, String titre, int annee, Integer duree, List<Personne> listActeurs, Personne realisateur,
 			Genre genre) {
-		this.setId(id);
+		super.setId(id);
 		this.titre = titre;
 		this.annee = annee;
 		this.duree = duree;
@@ -133,14 +132,6 @@ public class Film {
 
 	public void setRealisateur(Personne realisateur) {
 		this.realisateur = realisateur;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getSynopsis() {

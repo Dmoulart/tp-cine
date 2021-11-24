@@ -8,11 +8,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Genre {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+public class Genre extends AppEntity {
 	
 	@Basic
 	private String libelle;
@@ -37,20 +33,5 @@ public class Genre {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-
-
-
-	public int getId() {
-		return id;
-	}
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	
-	
 	
 }
