@@ -24,7 +24,7 @@ public class UserService extends EntityService<AppUser> implements UserDetailsSe
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public UserService(AppUserRepository repository) {
+	public UserService(EntityRepository<AppUser> repository) {
 		super(repository);
 	}
 

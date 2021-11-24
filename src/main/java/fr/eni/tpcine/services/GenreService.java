@@ -8,33 +8,15 @@ import org.springframework.stereotype.Service;
 
 import fr.eni.tpcine.bo.Film;
 import fr.eni.tpcine.bo.Genre;
+import fr.eni.tpcine.repository.EntityRepository;
 import fr.eni.tpcine.repository.FilmRepository;
 import fr.eni.tpcine.repository.GenreRepository;
 
 @Service
-public class GenreService implements GenreServiceInterface{
-	
-	GenreRepository repository;
-	
-	@Autowired
-	public GenreService(GenreRepository repository) {
-		this.repository = repository;
-	}
-	
-	@Override
-	public List<Genre> findAll() {
-		return this.repository.findAll();
-	}
+public class GenreService extends EntityService<Genre> implements GenreServiceInterface{
 
-	@Override
-	public Optional<Genre> find(Integer id) {
-		return this.repository.findById(id);	
-	}
-
-	@Override
-	public void create(Genre genre) {
-		this.repository.save(genre);
-		this.repository.flush();
+	protected GenreService(EntityRepository<Genre> repository) {
+		super(repository);
 	}
 	
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import fr.eni.tpcine.bo.Film;
 import fr.eni.tpcine.bo.Genre;
 @Repository
-public interface GenreRepository extends JpaRepository<Genre, Integer> {
+public interface GenreRepository extends EntityRepository<Genre> {
 
 }

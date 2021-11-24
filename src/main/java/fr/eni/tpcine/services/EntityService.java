@@ -14,7 +14,7 @@ public abstract class EntityService<T extends AppEntity> implements EntityServic
 	EntityRepository<T> repository;
 	
 	@Autowired
-	public EntityService(EntityRepository<T> repository) {
+	protected EntityService(EntityRepository<T> repository) {
 		this.repository = repository;
 	}
 	
