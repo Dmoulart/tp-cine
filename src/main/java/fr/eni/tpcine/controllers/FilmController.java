@@ -17,85 +17,86 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import fr.eni.tpcine.bo.AppUser;
 import fr.eni.tpcine.bo.Avis;
 import fr.eni.tpcine.bo.Film;
 import fr.eni.tpcine.services.AvisServiceInterface;
 import fr.eni.tpcine.services.FilmServiceInterface;
 import fr.eni.tpcine.services.GenreServiceInterface;
 import fr.eni.tpcine.services.PersonneServiceInterface;
+import fr.eni.tpcine.services.UserServiceInterface;
 
 @Controller
+
 public class FilmController {
-	
+
 	private FilmServiceInterface filmService;
 	private PersonneServiceInterface personneService;
 	private GenreServiceInterface genreService;
 	private AvisServiceInterface avisService;
-	
-	
-	
+	private UserServiceInterface userService;
+
 	@Autowired
-	private void setService(
-			FilmServiceInterface service, 
-			PersonneServiceInterface personneService,
-			GenreServiceInterface genreService,
-			AvisServiceInterface avisService) {
+	private void setService(FilmServiceInterface service, PersonneServiceInterface personneService,
+			GenreServiceInterface genreService, AvisServiceInterface avisService,UserServiceInterface userService) {
 		this.filmService = service;
 		this.personneService = personneService;
 		this.genreService = genreService;
 		this.avisService = avisService;
+		this.userService = userService;
 	}
-	
+
 	@GetMapping("/film/{id}")
-	public String detail(@PathVariable Integer id, Model model) {	
-		
-		if(id == null) return "redirect:/listFilms";
-		
+	public String detail(@PathVariable Integer id, Model model) {
+
+		if (id == null)
+			return "redirect:/listFilms";
+
 		var film = this.filmService.find(id);
-		
-		if(film.isEmpty())  return "redirect:/listFilms";
-		
+
+		if (film.isEmpty())
+			return "redirect:/listFilms";
+
 		model.addAttribute("film", film.get());
-		
-		if(film.get().getAvis().size() > 0) {
+
+		if (film.get().getAvis().size() > 0) {
 			var avis = film.get().getAvis().get(0);
 			System.out.println(avis.getComment());
 			System.out.println(avis.getUser().getUsername());
 		}
-		
-		//Franglish is killing me...
+
+		// Franglish is killing me...
 		var userAvis = new Avis();
-		
-		// Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
+
+		// Authentication authentication =
+		// SecurityContextHolder.getContext().getAuthentication();
+
 		userAvis.setFilm(film.get());
-		
+
 		model.addAttribute("newAvis", userAvis);
-		
+
 		return "pages/detail";
 	}
-	
+
 	@GetMapping("/film/ajouter")
 	public String add(Model model) {
-		
+
 		Film film = null;
-		if(model.getAttribute("film") != null) {
+		if (model.getAttribute("film") != null) {
 			film = (Film) model.getAttribute("film");
-		}
-		else {
+		} else {
 			film = new Film();
 		}
-			
+
 		model.addAttribute("film", film);
 		model.addAttribute("personnes", this.personneService.findAll());
 		model.addAttribute("genres", this.genreService.findAll());
 		return "pages/add";
 	}
-	
+
 	@PostMapping("/film/ajouter")
 	public String add(@Valid @ModelAttribute("film") Film film, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			System.out.println("Errors");
+		if (result.hasErrors()) {
 			model.addAttribute("personnes", this.personneService.findAll());
 			model.addAttribute("genres", this.genreService.findAll());
 			return "pages/add";
@@ -103,24 +104,26 @@ public class FilmController {
 		this.filmService.create(film);
 		return "redirect:/";
 	}
-	
+
 	@PostMapping("/avis/ajouter")
 	public String addAvis(@Valid @ModelAttribute("avis") Avis avis, BindingResult result, Model model) {
-		System.out.println(avis);
-		if(result.hasErrors()) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		var user = this.userService.loadUserByUsername(authentication.getName());
+		// avis.setUser(user);
+		System.out.println(authentication.getName());
+		if (result.hasErrors()) {
 			return "pages/add";
 		}
 		this.avisService.create(avis);
 		return "redirect:/";
 	}
-	
-	@GetMapping({"/listFilms", "/","/home"})
+
+	@GetMapping({ "/listFilms", "/", "/home" })
 	public String listFilms(Model model) {
-		
-		model.addAttribute("films",filmService.findAll());
-		
+
+		model.addAttribute("films", filmService.findAll());
+
 		return "pages/list-films";
 	}
-	
-	
+
 }

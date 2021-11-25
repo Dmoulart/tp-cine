@@ -1,5 +1,6 @@
 package fr.eni.tpcine.bo;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -10,10 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.JoinColumn;
 
 @Entity
-public class AppUser extends AppEntity {
+public class AppUser extends AppEntity implements UserDetails{
 
 	@Column
 	private String username;
@@ -66,6 +71,35 @@ public class AppUser extends AppEntity {
 	@Override
 	public String toString() {
 		return "AppUser [username=" + username + ", password=" + password + ", roles=" + roles + ", avis=" + avis + "]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return (Collection<? extends GrantedAuthority>) roles;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
