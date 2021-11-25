@@ -37,6 +37,8 @@ function setPoster(poster) {
 }
 
 function setSynopsis(overview) {
+  //Sanitize string
+  overview = overview.replace(/[^a-z0-9áéíóúñü \.,_-]/gim, "").trim();
   synopsis.value = overview;
 }
 function setYear(releaseDate) {
