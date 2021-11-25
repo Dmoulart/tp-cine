@@ -9,4 +9,5 @@ public interface AppUserRepository extends EntityRepository<AppUser>{
 
 	AppUser findByUsername(String username);
 	
+	
 }

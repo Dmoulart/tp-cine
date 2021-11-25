@@ -16,10 +16,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.JoinColumn;
-
+//Should extend Spring User to make things clean but it breaks the hierarchy.. :(
 @Entity
 public class AppUser extends AppEntity implements UserDetails{
 
+	private static final long serialVersionUID = -5018492263009229221L;
+	
 	@Column
 	private String username;
 	@Column

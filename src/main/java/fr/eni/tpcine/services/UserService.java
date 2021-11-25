@@ -46,4 +46,9 @@ public class UserService extends EntityService<AppUser> implements UserDetailsSe
 		return authorities;
 	}
 
+	@Override
+	public AppUser loadCustomUserByUsername(String username) {
+		return ((AppUserRepository) this.repository).findByUsername(username);
+	}
+
 }

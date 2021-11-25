@@ -10,4 +10,5 @@ import fr.eni.tpcine.bo.AppUser;
 
 public interface UserServiceInterface extends EntityServiceInterface<AppUser> {
 	public UserDetails loadUserByUsername(String username);
+	public AppUser loadCustomUserByUsername(String username);
 }

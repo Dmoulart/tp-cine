@@ -107,14 +107,15 @@ public class FilmController {
 
 	@PostMapping("/avis/ajouter")
 	public String addAvis(@Valid @ModelAttribute("avis") Avis avis, BindingResult result, Model model) {
+		// Todo: find a way to map the default spring user to AppUser
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		var user = this.userService.loadUserByUsername(authentication.getName());
-		// avis.setUser(user);
-		System.out.println(authentication.getName());
-		if (result.hasErrors()) {
-			return "pages/add";
-		}
+		var user = this.userService.loadCustomUserByUsername(authentication.getName());
+		avis.setUser(user);
+		
+		if (result.hasErrors()) return "redirect:/";
+		
 		this.avisService.create(avis);
+		
 		return "redirect:/";
 	}
 
