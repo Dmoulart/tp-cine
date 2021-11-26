@@ -29,9 +29,11 @@ const tags = document.body.querySelectorAll("*");
 
 shrek.onload = () => {
   document.body.append(shrek);
+
   tags.forEach((tag) => {
     tag.style.backgroundColor = randomColor();
     tag.style.transition = `all ${randDecimal()}s`;
+
     setInterval(() => {
       const randWidth = Math.round(Math.random() * 100);
       tag.style.width = `${randWidth}vw`;

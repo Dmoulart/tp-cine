@@ -3,10 +3,13 @@ import { moviedb } from "./moviedb-api.js";
 const filmsImgElements = document.querySelectorAll(".film-img");
 
 filmsImgElements.forEach(async (film) => {
+
   const movieData = await moviedb.search(film.id);
+
   if (movieData) {
     film.src = movieData.poster;
   }
+  
 });
 
 // title.onchange = async function () {
