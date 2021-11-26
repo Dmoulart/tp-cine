@@ -35,7 +35,7 @@
 
 				<h3 class="my-5">Les avis</h3>
 
-				<th:block th:each="avis: ${film.avis}">
+				<div th:each="avis: ${film.avis}" class="avis">
 
 					<p class="font-weight-bold"
 						style="font-weight: bold; font-variant-caps: small-caps"
@@ -48,24 +48,36 @@
 						th:text="${avis.comment}"></p>
 						
 
-				</th:block>
+				</div>
 
 				<h3 class="mt-5">Laisser un avis</h3>
 
 				<form method="post" class="" id="form" th:object=${newAvis}
 					th:action="@{/avis/ajouter}">
+					
 					<div class="form-group">
 						<label for="noteInput" class="">Note</label> <input
 							class="form-control" id="noteInput" type="number"
 							th:field="*{note}" />
 					</div>
-
+					
+					<span class="help-block" th:if="${#fields.hasErrors('note')}"><ul>
+								<li th:each="erreur: ${#fields.errors('note')}"
+									th:text="${erreur}"></li>
+							</ul></span>
+							
+							
 					<div class="form-group">
 						<label for="commentInput" class="">Commentaire</label>
 						<textarea row="20" placeholder="Ce film de m..."
 							class="form-control" id="commentInput" th:field="*{comment}" />
 					</div>
-
+					
+					<span class="help-block" th:if="${#fields.hasErrors('comment')}"><ul>
+								<li th:each="erreur: ${#fields.errors('comment')}"
+									th:text="${erreur}"></li>
+							</ul></span>
+							
 					<input type="hidden" th:field="${newAvis.film}"
 						th:value="${film.id}"> <input
 						class="btn btn-primary  w-100  mt-4" type="submit"

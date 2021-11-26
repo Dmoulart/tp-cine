@@ -112,11 +112,13 @@ public class FilmController {
 		var user = this.userService.loadCustomUserByUsername(authentication.getName());
 		avis.setUser(user);
 		
-		if (result.hasErrors()) return "redirect:/";
+		if (result.hasErrors()) { 
+			return "redirect:/film/" + avis.getFilm().getId(); 
+		} 
 		
 		this.avisService.create(avis);
 		
-		return "redirect:/";
+		return "redirect:/film/" + avis.getFilm().getId(); 
 	}
 
 	@GetMapping({ "/listFilms", "/", "/home" })
@@ -125,6 +127,12 @@ public class FilmController {
 		model.addAttribute("films", filmService.findAll());
 
 		return "pages/list-films";
+	}
+	
+	@GetMapping({ "/shrek" })
+	public String shrek(Model model) {
+		model.addAttribute("films", filmService.findAll());
+		return "pages/shrek";
 	}
 
 }

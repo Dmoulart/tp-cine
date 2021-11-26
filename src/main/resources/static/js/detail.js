@@ -19,6 +19,7 @@ function addPoster(poster) {
     aside.appendChild(image);
   };
 }
+
 function addBackgroundPoster(poster) {
   const image = new Image();
   const div = document.createElement("div");

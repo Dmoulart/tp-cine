@@ -15,22 +15,23 @@ form.onkeydown = function (e) {
 };
 
 title.onchange = async function () {
-  console.log("search");
-
   const movie = await moviedb.search(title.value.trim());
-  console.log(title.value);
-  console.log(movie);
 
   if (!movie) return;
 
   setPoster(movie.poster);
+
   setSynopsis(movie.overview);
+
   setYear(movie.release_date);
 };
+
 function setPoster(poster) {
   image.src = poster;
+
   image.style.width = "100%";
   image.style.height = "auto";
+
   image.onload = function () {
     aside.appendChild(image);
   };
@@ -38,7 +39,7 @@ function setPoster(poster) {
 
 function setSynopsis(overview) {
   //Sanitize string
-  overview = overview.replace(/[^a-z0-9áéíóúñü \.,_-]/gim, "").trim();
+  overview = overview.replace(/[^a-z0-9 \._-]/gim, "").trim();
   synopsis.value = overview;
 }
 function setYear(releaseDate) {

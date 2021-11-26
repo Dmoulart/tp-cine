@@ -8,16 +8,21 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class Avis extends AppEntity {
 	@Basic
+	@Range(min=0,max=5, message="Votre note doit être entre 0 et 5")
 	int note;
 	
 	@Basic
 	Date date;
 	
 	@Basic
+	@NotEmpty(message="Vous devez saisir commentaire.")
 	String comment;
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE})
